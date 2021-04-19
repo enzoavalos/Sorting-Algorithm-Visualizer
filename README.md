@@ -2,7 +2,7 @@
 ### Visualizing the way sorting algorithms work was never this easy!
 
 ## Topics involved:
-- Algrithms implemented: Quicksort, Radixsort, MergeSort, Shellsort, Timsort and Heapsort.
+- Algorithms implemented: Quicksort, Radixsort, MergeSort, Shellsort, Timsort and Heapsort.
 - Classes and instances
 - Basic GUI design
 
@@ -33,7 +33,7 @@ After you have already downloaded and installed python you can use the following
  sudo yum install python3-pygame
  ```
  
-Finally, to run the program, either an IDE o interpreter will be needed, my recommendation is [VS Code](https://code.visualstudio.com/).  
+Finally, to run the program, either an IDE or interpreter will be needed, my recommendation is [VS Code](https://code.visualstudio.com/).  
 After installation you will also need to download the phyton extension. In order to do this just prees the keyboard shortcut:
 ```
 Ctrl + Shift + P
