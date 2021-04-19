@@ -5,12 +5,12 @@ from time import time,sleep
 
 def welcomeMessage(screen):
 	"""
-	Muestra un mensaje en la pantalla principal
+	Shows a message in the main screen
 	"""
 	fuente = pg.font.SysFont("Comic Sans MS",26)
 	fuente.set_underline(True)
 	fuente.set_bold(True)
-	text = fuente.render("Bienvenido! Elija un ordenamiento para visualizarlo",True,(0,180,0))
+	text = fuente.render("Welcome! Choose any algorithm to visualize it",True,(0,180,0))
 	required_size = text.get_rect()
 	screen.blit(text,(400-(required_size[2]/2) ,45-(required_size[3]/2)))
 
@@ -26,7 +26,7 @@ def drawLines(screen,array_to_sort):
 
 def initializeParameters():
 	"""
-	Instancia e inicializa objetos necesarios de las distintas clases
+	Instantiates and initializes the necessary objects from each class
 	"""
 	global global_params
 	background_img = pg.transform.scale(pg.image.load("Background.png"),(800,450))
@@ -35,7 +35,7 @@ def initializeParameters():
 	flags,window_size = DOUBLEBUF,(800,450)
 	screen = pg.display.set_mode(window_size,flags)
 	screen.set_alpha(None)
-	pg.display.set_caption("Visualizador de Ordenamientos")
+	pg.display.set_caption("Sorting Visualizer")
 
 	pg.event.set_blocked(None)
 	pg.event.set_allowed(pg.QUIT)
@@ -48,7 +48,9 @@ def initializeParameters():
 
 def updateMainScreen(screen,portion=None):
 	"""
-	Actualiza todos los elementos de la pantalla
+	Updates the main screen, when a value is passed to portion argument, only the part of the screen that shows the array is updated, this allows
+	for faster execution.
+	Case contrary, the whole screen is updated
 	"""
 	global global_params
 	
@@ -73,7 +75,7 @@ def updateMainScreen(screen,portion=None):
 
 def buttonCommands(array_to_sort,screen,number):
 	"""
-	Contiene los comandos asignados a cada uno de los botones
+	Stores the commands associated with each button. Then proceds onto calling the corresponding function
 	"""
 	command_list = {
 		0:lambda:array_to_sort.scrambleValues(),
@@ -99,7 +101,7 @@ def buttonCommands(array_to_sort,screen,number):
 
 def checkButtonContact(mouse_pos,buttons,array_to_sort,screen):
 	"""
-	Verifica si el cursor se encuentra en contacto con alguno de los botones
+	Verifies if the cursor is in contact with any of the buttons
 	"""
 	mouse_pos = pg.Rect(mouse_pos[0]-1,mouse_pos[1]-1,2,2)
 
@@ -109,13 +111,16 @@ def checkButtonContact(mouse_pos,buttons,array_to_sort,screen):
 			if mouse_pos.colliderect(button_rect): buttonCommands(array_to_sort,screen,i)
 
 def trackTime(array_to_sort):
+	"""
+	Tracks the execution time of the current algorithm
+	"""
 	end_time = time()
 	total_time = end_time - array_to_sort.duration
 	array_to_sort.duration = round(total_time,4)
 		
 
 """--------------------------------------------------------------------
-						Ordenamientos
+						Sorting Algortihms
 	-------------------------------------------------------------------
 """
 def quickSort(array_to_sort,screen,start,end):
@@ -123,6 +128,10 @@ def quickSort(array_to_sort,screen,start,end):
 	Se elige un valor como pivot, en este caso el ultimo, y se ordena el resto del arreglo, ubicando el mismo en su posicion
 	correspondiente y ubicando a su izquierda todos los valores menores a el, y a su derecha los mayores. Luego se ordena de forma
 	recursiva los valores a su izquierda y a su derecha, hasta que el subarray tenga longitud 1 o menor.
+
+	A value is picked as a pivot, in this particular the last element, positioning this one in it´s corresponding position and locating
+	to it´s left all values smaller than it, and to it´s right all values bigger to it. Then, all the values to it´s left and right are sorted
+	recursively, until the sub-array has a length of 1 or less.
 	"""
 	if start >= end:
 		if start >= len(array_to_sort.values)-1:
@@ -151,6 +160,9 @@ def merge(array,left,right):
 	"""
 	Funcion auxiliar para el metodo mergeSort, recibe 2 listas correspondientes a particion del arreglo a ordenar, y las une en una
 	sola lista ordenada
+
+	Auxiliar function for merge sort algorithm, receives 2 lists corresponding to a partition of the array to sort, and unites them in
+	a single lista
 	"""
 	merged_list = []
 	i = j = 0
@@ -175,6 +187,9 @@ def mergeSort(array_to_sort,screen,start,end):
 	"""
 	Se subdivide el array de forma recursiva en dos mitades iguales o de longitud n y n-1. Al llegar a una sublista de longitud 1 o 0
 	se considera que ya esta ordenada. Luego se ordena cada sublista recursivamente utilizando la funcion merge
+
+	The array is sub-divided recursively into two equal halves or with a length of n and n-a. When a sub-list with length 1 or 0 is reached, it
+	is considered ordered. Then each sub-list is sorted recursively using the merge function
 	"""
 	sub_array = []
 
@@ -207,6 +222,9 @@ def radixSort(array_to_sort,screen,current_digit=1):
 	Ordenamiento radixSort LSD(least significative digit). Se analiza de forma recursiva cada digito de los valores del arreglo,
 	empezando desde el ultimo y se los almacena en casillas segun estos. Al trabajar con enteros, tendremos 10 casilleros, cada uno
 	para un digito en particular.
+
+	Every digit of the array elements are recursively analized, starting for the last one, an it is stored in boxes acording to this, as we
+	are working with integers there will be 10 boxes, one for each particular digit (0-9)
 	"""
 	sorted_array = [[],[],[],[],[],[],[],[],[],[]]
 	if current_digit > len(str(max(array_to_sort.values))):
@@ -235,6 +253,9 @@ def shellSort(array_to_sort,screen,step):
 	Se toman los valores del arreglo y se los acomoda en filas de cierta longitud, paso siguiente se ordenan las columnas resultantes
 	de dichas filas, y se vuelve a formar una lista a partir de las filas. Asi se ordena de forma recursiva el arreglo, con cada vez
 	menos columnas pero de mayor longitud, y se repite hasta que la longitud sea 0.
+
+	The values of the array are placed in rows of certain lenght, next every column of those rows are sorted, and a new list is formed
+	from the rows. This way the array is sorted recursively, each time with less columns but with bigger length, until this length is 0.
 	"""
 	def localInsertionSort(array):
 		index = len(array)-1
@@ -287,6 +308,9 @@ def timSort(array_to_sort,screen):
 	timSort utiliza ambos mergeSort como el ordenamiento de insercion para su funcionamiento. Se subdivide el arreglo en listas de
 	tamaño 32 o 64, para una optimizacion de los ordenamientos. Cada sublista es ordenada mediante insercion, y luego son combinadas
 	de a una utilizando la funcion merge del ordenamiento merge.
+
+	Timsort uses both insertion sort and merge sort to function. The array is divided in lists of size either 32 or 64, to optimize the
+	algorithm. Each sub-list is sorted with insertion, and then combined one by one using the merge function of merge sort.
 	"""
 	def localInsertionSort(array,start,end):
 		i = start
@@ -357,8 +381,11 @@ def timSort(array_to_sort,screen):
 
 def heapifyArray(array,parent,lenght,screen):
 	"""
-	Toma un arreglo y lo modifica a la forma de un max heap binario, teniendo un indice i y tomando a este como nodo padre o raiz, su hijo izquierdo estara
-	en 2*i+1 y el derecho en el indice 2*i+2. Un max heap es aquel donde todos los nodos hijos de un nodo son iguales o menores a el
+	Toma un arreglo y lo modifica a la forma de un max heap binario, teniendo un indice i y tomando a este como nodo padre o raiz, su hijo izquierdo 
+	estara en 2*i+1 y el derecho en el indice 2*i+2. Un max heap es aquel donde todos los nodos hijos de un nodo son iguales o menores a el
+
+	Takes an array and converts it into a max binary heap. Taking and arbitrary i index as parent, it´s left children will be in the position 2*i+1
+	and it´s rigth children in the position 2*i+2. A max heap consists of a heap where every children of a node is equal or smaller than him.
 	"""
 	biggest = array.values[parent]
 	left_child = (parent*2)+1
@@ -383,6 +410,7 @@ def buildHeap(array,lenght,screen):
 
 def extractRoot(array,lenght,screen):
 	"""
+	Extracts the heap root, that is always the biggest element of the array, by definition
 	Extrae la raiz del heap, que por definicion sera siempre el elemento mas grande del arreglo
 	"""
 	last_leaf = lenght
@@ -406,6 +434,9 @@ def heapSort(array_to_sort,screen):
 	Consiste en almacenar todos los elementos del arreglo en un heap, aunque se puede implementar este como un arreglo y luego extraer el nodo raiz
 	que se encuentra en la cima en sucesivas iteraciones para obtener el conjunto ordenado. Su funcionamiento se basa en la propiedad de los heaps de
 	que la cima siempre contiene el menor o mayor elemento, segun su implementacion.
+
+	Consists in storing all the elements of a given array in a heap, however is possible to implement this heap as an array, to then extracting the
+	root node repeatedly,which will always be the biggest unsorted element of the array by definition of max heap. 
 	"""
 	buildHeap(array_to_sort,len(array_to_sort.values),screen)
 
