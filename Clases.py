@@ -56,13 +56,13 @@ class Botones:
 		Devuelve las caracteristicas de todos los botones a graficar
 		"""
 		attribute_list = {
-			0:["Scramble",150,360],
-			1:["Radix Sort(LSD)",650,360],
-			2:["Merge Sort",400,360],
-			3:["Quick Sort",160,400],
-			4:["Shell Sort",320,400],
-			5:["Tim Sort",480,400],
-			6:["Heap Sort",640,400],
+			0:["Scramble",150,370],
+			1:["Radix Sort(LSD)",650,370],
+			2:["Merge Sort",400,370],
+			3:["Quick Sort",160,415],
+			4:["Shell Sort",320,415],
+			5:["Tim Sort",480,415],
+			6:["Heap Sort",640,415],
 			7:["Visualize",200,320],
 			8:["Slow",400,320],
 			9:["Fast",600,320],
