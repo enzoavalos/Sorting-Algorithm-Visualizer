@@ -15,7 +15,7 @@ class Arreglo:
 
 	def __generateValues(self):
 		"""
-		Genera un arreglo de enteros con valores entre 40 y 160
+		Generates an array of integer with values ranging between 40 and 160
 		"""
 		array = linspace(40,160,121)
 		array = array.astype(int)
@@ -27,14 +27,14 @@ class Arreglo:
 
 	def scrambleValues(self):
 		"""
-		Mezcla los elementos del arreglo de forma aleatoria
+		Scrambles the elements of the array randomly
 		"""
 		shuffle(self.values)
 		self.status,self.duration = "Scrambled",0
 
 	def showSortingTime(self,screen):
 		"""
-		Muestra informacion especifica sobre el ordenamiento que se esta ejecutando
+		Show the execution time of the algorithm once this is done
 		"""
 		attribute_list =  ["Duration: {} seg.".format(self.duration,2),400,290]
 
@@ -53,7 +53,7 @@ class Botones:
 
 	def buttonSpecs(self,number):
 		"""
-		Devuelve las caracteristicas de todos los botones a graficar
+		Returns the specifications of every button to draw
 		"""
 		attribute_list = {
 			0:["Scramble",150,370],
@@ -77,7 +77,7 @@ class Botones:
 
 	def displayButtons(self,screen,array_to_sort):
 		"""
-		Dibuja en pantallas los botones correspondientes a los distintos algoritmos para seleccionar
+	Draws all the buttons in the main screen
 		"""
 		for i in range(10):
 			attribute_list = self.buttonSpecs(i)
