@@ -11,6 +11,7 @@
 - pygame version 2.0.1  
 
 ## Steps to get started:  
+If you want to see the final program in execution, there is a ***How it works video*** included in this repo. On the other hand, if you wish to execute the program yourself, keep reading...  
 ### Prerequisites:  
 It will be needed for you to download the files present in the repo and save them all in the same directory. Additionaly, it is a requirement to have both [Python](https://www.python.org/) and the library [Pygame](https://www.pygame.org/news) installed on your machine.  
 After you have already downloaded and installed python you can use the following commands in the terminal to install pygame depending on your OS:
