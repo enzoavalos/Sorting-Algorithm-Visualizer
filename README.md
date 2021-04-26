@@ -33,8 +33,8 @@ After you have already downloaded and installed python you can use the following
  sudo yum install python3-pygame
  ```
  
-Finally, to run the program, either an IDE or interpreter will be needed, my recommendation is [VS Code](https://code.visualstudio.com/).  
-After installation you will also need to download the phyton extension. In order to do this just prees the keyboard shortcut:
+Finally, to run the program, either an IDE or interpreter will be needed, my personal recommendation is [VS Code](https://code.visualstudio.com/).  
+After installation you will also need to download the phyton extension. In order to do this just press the keyboard shortcut:
 ```
 Ctrl + Shift + P
 ```
